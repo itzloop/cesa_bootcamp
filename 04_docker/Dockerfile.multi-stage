@@ -1,0 +1,20 @@
+# Use the official Golang image as the base image
+FROM golang:1.23.0-alpine AS builder
+
+# set the current working directory inside the container
+WORKDIR /app
+
+# copy the source code from the host machine to the container
+COPY . .
+
+# compile the go application
+RUN go build -o hello-docker .
+
+# stage 2
+FROM alpine:latest
+
+WORKDIR /build
+
+COPY --from=builder /app/hello-docker .
+
+CMD ["./hello-docker"]
