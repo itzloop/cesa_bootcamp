@@ -2,6 +2,8 @@ package fanin
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestFanIn(t *testing.T) {
@@ -39,7 +41,5 @@ func TestFanIn(t *testing.T) {
 		actualSum += result
 	}
 
-	if actualSum != expectedSum {
-		t.Errorf("expected the sum to be %d, but got %d", expectedSum, actualSum)
-	}
+    assert.EqualValues(t, expectedSum, actualSum)
 }
