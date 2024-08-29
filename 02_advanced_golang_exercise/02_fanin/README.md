@@ -33,4 +33,4 @@ go test ./... -v
 
 ## Notes
 
-- If you are stuck or in need of any help, feel free to pop a question in the group chat or in private.
+- If you are stuck or in need of any help, feel free to ask a question in the group chat or in private.
