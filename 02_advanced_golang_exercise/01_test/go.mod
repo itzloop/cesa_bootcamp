@@ -1,4 +1,4 @@
-module advanced_exercise
+module golang_advanced_exercise_test
 
 go 1.22
 
