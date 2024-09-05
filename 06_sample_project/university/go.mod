@@ -3,6 +3,7 @@ module go-university
 go 1.21.5
 
 require (
+	github.com/gin-contrib/cors v1.7.2
 	github.com/gin-gonic/gin v1.10.0
 	github.com/joho/godotenv v1.5.1
 	github.com/shopspring/decimal v1.4.0

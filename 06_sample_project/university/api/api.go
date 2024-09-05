@@ -8,6 +8,7 @@ import (
 	"go-university/api/student"
 	"go-university/internal/config"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,7 +17,13 @@ type Router struct {
 }
 
 func NewRouter() *Router {
+	ginConfig := cors.DefaultConfig()
+	ginConfig.AllowOrigins = []string{"*"}
+	ginConfig.AllowHeaders = []string{"X-Requested-With", "Content-Type", "Authorization"}
+	ginConfig.AllowCredentials = true
+
 	r := gin.Default()
+	r.Use(cors.New(ginConfig))
 
 	v1 := r.Group("/v1")
 

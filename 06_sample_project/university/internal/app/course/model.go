@@ -3,11 +3,11 @@ package course
 import "time"
 
 type Course struct {
-	ID        int64  `json:"id"`
-	Title     string `json:"title"`
-	Credits   int32  `json:"credits"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID        int64     `json:"id"`
+	Title     string    `json:"title"`
+	Credits   int32     `json:"credits"`
+	CreatedAt time.Time `json:"-"`
+	UpdatedAt time.Time `json:"-"`
 }
 
 type CourseProfessor struct {

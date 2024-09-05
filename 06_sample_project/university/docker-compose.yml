@@ -17,8 +17,8 @@ services:
       timeout: 5s
 
   server:
-    container_name: nerkhin-server
-    image: ${DOCKER_HUB_USERNAME}/${IMAGE_TAG}
+    container_name: uni-server
+    image: ${IMAGE_TAG}
     ports:
       - "${HOST_PORT}:${CONTAINER_PORT}"
     restart: unless-stopped

@@ -7,6 +7,10 @@ import (
 )
 
 func Create(ctx context.Context, course *Course) (int64, error) {
+	if course.ID > 0 {
+		return 0, errors.New("course cannot have id in create")
+	}
+
 	gormDB := db.GetDB()
 
 	err := gormDB.Create(course).Error
@@ -22,7 +26,7 @@ func GetByID(ctx context.Context, id int64) (*Course, error) {
 
 	var course *Course
 	err := gormDB.Model(&Course{}).
-		Where("id = ?", id).
+		Where(&Course{ID: id}).
 		Take(&course).Error
 	if err != nil {
 		return nil, err
@@ -33,7 +37,7 @@ func GetByID(ctx context.Context, id int64) (*Course, error) {
 
 func Update(ctx context.Context, course *Course) error {
 	if course.ID < 1 {
-		return errors.New("course is not valid")
+		return errors.New("course id is not valid")
 	}
 
 	gormDB := db.GetDB()
