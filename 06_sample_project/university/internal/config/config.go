@@ -11,6 +11,11 @@ type DBConfig struct {
 	MigrationsPath string
 }
 
+type HttpConfig struct {
+	Url  string
+	Port string
+}
+
 func LoadDBConfig() DBConfig {
 	return DBConfig{
 		Host:           os.Getenv("DB_HOST"),
@@ -19,5 +24,12 @@ func LoadDBConfig() DBConfig {
 		Password:       os.Getenv("DB_PASSWORD"),
 		DBName:         os.Getenv("DB_NAME"),
 		MigrationsPath: os.Getenv("DB_MIGRATIONS_PATH"),
+	}
+}
+
+func LoadHttpConfig() HttpConfig {
+	return HttpConfig{
+		Url:  os.Getenv("HTTP_URL"),
+		Port: os.Getenv("HTTP_PORT"),
 	}
 }
