@@ -10,8 +10,6 @@ import (
 func BootServer() error {
 	dbConfig := config.LoadDBConfig()
 
-	// ctx := context.Background()
-
 	err := db.ConnectDB(dbConfig)
 	if err != nil {
 		return err

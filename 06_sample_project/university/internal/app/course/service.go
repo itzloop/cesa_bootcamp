@@ -2,6 +2,7 @@ package course
 
 import (
 	"context"
+	"errors"
 	"go-university/internal/db"
 )
 
@@ -22,7 +23,7 @@ func GetByID(ctx context.Context, id int64) (*Course, error) {
 	var course *Course
 	err := gormDB.Model(&Course{}).
 		Where("id = ?", id).
-		Scan(&course).Error
+		Take(&course).Error
 	if err != nil {
 		return nil, err
 	}
@@ -31,9 +32,32 @@ func GetByID(ctx context.Context, id int64) (*Course, error) {
 }
 
 func Update(ctx context.Context, course *Course) error {
+	if course.ID < 1 {
+		return errors.New("course is not valid")
+	}
+
+	gormDB := db.GetDB()
+
+	err := gormDB.Updates(&course).Error
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
 func Delete(ctx context.Context, id int64) error {
+	if id < 1 {
+		return errors.New("course id is not valid")
+	}
+
+	gormDB := db.GetDB()
+
+	err := gormDB.Where("id = ?", id).
+		Delete(&Course{}).Error
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
