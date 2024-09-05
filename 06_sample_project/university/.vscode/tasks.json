@@ -1,0 +1,146 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "env": {}
+  },
+  "tasks": [
+    {
+      "label": "pg-up",
+      "command": "make",
+      "type": "shell",
+      "args": ["pg-up"],
+      "group": "none",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "pg-down",
+      "command": "make",
+      "type": "shell",
+      "args": ["pg-down"],
+      "group": "none",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "pg-downv",
+      "command": "make",
+      "type": "shell",
+      "args": ["pg-downv"],
+      "group": "none",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "db-init",
+      "command": "make",
+      "type": "shell",
+      "args": ["db-init"],
+      "group": "none",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mig-create",
+      "command": "make",
+      "type": "shell",
+      "args": ["mig-create", "f=${input:mig_file_name}"],
+      "group": "none",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mig-up",
+      "command": "make",
+      "type": "shell",
+      "args": ["mig-up", "c=${input:count}"],
+      "group": "none",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mig-down",
+      "command": "make",
+      "type": "shell",
+      "args": ["mig-down", "c=${input:count}", "a=${input:all}"],
+      "group": "none",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "mig-force",
+      "command": "make",
+      "type": "shell",
+      "args": ["mig-force", "v=${input:version}"],
+      "group": "none",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "mig_file_name",
+      "type": "promptString",
+      "description": "The name of your migration file"
+    },
+    {
+      "id": "count",
+      "type": "promptString",
+      "description": "Apply all or N migrations",
+      "default": ""
+    },
+    {
+      "id": "all",
+      "type": "pickString",
+      "options": ["", "-all"],
+      "description": "Use -all to apply all down migrations",
+      "default": ""
+    },
+    {
+      "id": "version",
+      "type": "promptString",
+      "description": "Set version V but don't run migration (ignores dirty state)",
+      "default": ""
+    }
+  ]
+}
