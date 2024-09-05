@@ -47,20 +47,6 @@
       "problemMatcher": []
     },
     {
-      "label": "db-init",
-      "command": "make",
-      "type": "shell",
-      "args": ["db-init"],
-      "group": "none",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "presentation": {
-        "reveal": "always"
-      },
-      "problemMatcher": []
-    },
-    {
       "label": "mig-create",
       "command": "make",
       "type": "shell",

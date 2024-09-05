@@ -5,10 +5,17 @@ import (
 	"go-university/internal/boot"
 	"log"
 	"os"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	err := boot.BootServer()
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	err = boot.BootServer()
 	if err != nil {
 		log.Fatal(err)
 		os.Exit(1)

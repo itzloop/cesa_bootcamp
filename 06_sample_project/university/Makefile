@@ -4,7 +4,6 @@ ENV_FILE=.env
 include $(ENV_FILE)
 
 DB_SCRIPTS_PATH="scripts/db"
-# DB_CREATE_FILE="$(DB_SCRIPTS_PATH)/create_db.sql"
 COMPOSE_FILE_PATH="docker-compose.yml"
 DB_MIGRATIONS_PATH="$(DB_SCRIPTS_PATH)/migrations"
 
@@ -14,16 +13,13 @@ DB_CONN_STR="postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAM
 REMOTE_IMAGE_TAG=$(DOCKER_HUB_USERNAME)/$(IMAGE_TAG):0.0.1
 
 pg-up:
-	@docker compose -f $(COMPOSE_FILE_PATH) --env-file $(ENV_FILE) up -d
+	@docker compose --env-file $(ENV_FILE) up -d postgres
 
 pg-down:
-	@docker compose -f $(COMPOSE_FILE_PATH) --env-file $(ENV_FILE) down
+	@docker compose --env-file $(ENV_FILE) down postgres
 
 pg-downv:
 	@docker compose -f $(COMPOSE_FILE_PATH) --env-file $(ENV_FILE) down -v
-
-# db-init:
-# 	@psql $(PG_CONN_STR) -f $(DB_CREATE_FILE)
 
 mig-create:
 	@migrate create -ext sql -dir $(DB_MIGRATIONS_PATH) -seq -digits 8 $f
@@ -52,11 +48,20 @@ push-remote:
 pull-remote:
 	@docker pull $(REMOTE_IMAGE_TAG)
 
-# compose-up:
-# 	@docker compose --env-file $(ENV_FILE) up postgres server
+server-up:
+	@docker compose --env-file $(ENV_FILE) up -d server
 
-# compose-down:
-# 	@docker compose --env-file $(ENV_FILE) down
+server-down:
+	@docker compose --env-file $(ENV_FILE) down server
 
-# compose-down-v:
-# 	@docker compose --env-file $(ENV_FILE) down --volumes
+server-down-v:
+	@docker compose --env-file $(ENV_FILE) down --volumes server
+
+all-up:
+	@docker compose --env-file $(ENV_FILE) up -d
+
+all-down:
+	@docker compose --env-file $(ENV_FILE) down
+
+all-down-v:
+	@docker compose --env-file $(ENV_FILE) down --volumes
