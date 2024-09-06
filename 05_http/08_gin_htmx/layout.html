@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      setTimeout(function () {
+        window.location.reload();
+      }, 1000);
+    </script>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Logs</h1>
+    <table class="table table-zebra">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Time</th>
+          <th>Content</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .Logs}}
+        <tr>
+          <td class="w-1/5">{{.ID}}</td>
+          <td>{{.Time}}</td>
+          <td>{{.Content}}</td>
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+package views
+
+import "todo-go-htmx/models"
+
+
+templ TodoTable(todos []models.Todo) {
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-50" id="todoList">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-green-500 dark:text-gray-100">
+            <tr>
+              <th scope="col" class="px-6 py-3">
+                Description
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Completed
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Delete
+              </th>
+            </tr>
+        </thead>
+        <tbody>
+        for _, todo := range todos {
+           @TodoTableItem(todo)
+        }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,144 @@
+basePath: /api
+definitions:
+  task.CreateRequest:
+    properties:
+      title:
+        type: string
+    type: object
+  task.CreateResponse:
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+    type: object
+  task.GetAllResponse:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/task.Task'
+        type: array
+    type: object
+  task.GetResponse:
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+    type: object
+  task.Task:
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+    type: object
+  task.UpdateRequest:
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: Golang Swagger Architectures endpoints
+  title: API Docs
+  version: "1.0"
+paths:
+  /task:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: size
+        in: query
+        name: size
+        type: integer
+      - description: term
+        in: query
+        name: term
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/task.GetAllResponse'
+      tags:
+      - Authentication
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/task.CreateRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/task.CreateResponse'
+      tags:
+      - Authentication
+  /task/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+      tags:
+      - Authentication
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/task.GetResponse'
+      tags:
+      - Authentication
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/task.UpdateRequest'
+      responses:
+        "200":
+          description: OK
+      tags:
+      - Authentication
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"
