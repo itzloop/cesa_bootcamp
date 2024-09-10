@@ -34,7 +34,6 @@ func TestCachingSmall(t *testing.T) {
 func TestCachingBig(t *testing.T) {
 	setup(t, true)
 	test(t)
-
 }
 
 func test(t *testing.T) {
@@ -75,13 +74,15 @@ func test(t *testing.T) {
 		d := time.Since(start)
 		fmt.Printf("Time it took to get %d users from Redis and Postgres (miss): %v\n", len(users), d)
 
-		start = time.Now()
-		users, err = cachedRepo.GetByUsername(context.Background(), "Bob44")
-		require.NoError(t, err)
-		d = time.Since(start)
-		fmt.Printf("Time it took to get %d users from Redis (hit): %v\n", len(users), d)
+		for i := 0; i < 10; i++ {
+			start = time.Now()
+			users, err = cachedRepo.GetByUsername(context.Background(), "Bob44")
+			require.NoError(t, err)
+			d = time.Since(start)
+			fmt.Printf("Time it took to get %d users from Redis (hit): %v\n", len(users), d)
 
-		assert.Greater(t, len(users), 0)
+			assert.Greater(t, len(users), 0)
+		}
 	})
 }
 
